@@ -15,6 +15,7 @@ public class StageAdmin : MonoBehaviour
     void Start()
     {
         Managers.Stage.Stage = 0;
+        Managers.PlayerStatus.HitCount = 0;
         Managers.Stage.StartStage();
     }
 

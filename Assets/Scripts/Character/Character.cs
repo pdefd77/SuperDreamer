@@ -146,11 +146,11 @@ public class Character : MonoBehaviour
                 if(Managers.PlayerStatus.NowWeaponType==WeaponType.sword&& Managers.PlayerStatus.HitCount >= 10)
                 {
                     Managers.PlayerStatus.HitCount = 0;
-                    enemy?.GetComponent<Enemy1>().TakeDamage(Managers.PlayerStatus.Damage * 2f); // 검 크리티컬
+                    if (enemy != null) enemy.GetComponent<Enemy1>().TakeDamage(Managers.PlayerStatus.Damage * 2f); // 검 크리티컬
                 }
                 else
                 {
-                    enemy?.GetComponent<Enemy1>().TakeDamage(Managers.PlayerStatus.Damage);
+                    if (enemy != null) enemy.GetComponent<Enemy1>().TakeDamage(Managers.PlayerStatus.Damage);
                 }
             }
         }
@@ -181,6 +181,8 @@ public class Character : MonoBehaviour
 
         isGuard = 1;
 
+        yield return null;
+
         List<Collider2D> attackedEnemies = new();
 
         while (attackedEnemies.Count == 0)
@@ -197,7 +199,7 @@ public class Character : MonoBehaviour
 
         foreach (GameObject enemy in Managers.Stage.EnemyQueue)
         {
-            enemy?.GetComponent<Enemy1>().KnockBack(power);
+            if (enemy != null) enemy.GetComponent<Enemy1>().KnockBack(power);
         }
 
         Vector2 repulsionSpeed = Vector2.left * 8f;
